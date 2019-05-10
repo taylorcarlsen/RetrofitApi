@@ -56,10 +56,20 @@ namespace IdeaAPI.Controllers
             };
 
         // GET api/values
-        [HttpGet]
-        public IActionResult Get()
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    return Ok(ideas);
+        //}
+
+            [HttpGet]
+            public IActionResult Get(String owner, int count = 100)
         {
-            return Ok(ideas);
+            if(!string.IsNullOrEmpty(owner))
+            {
+                return Ok(ideas.Where(x => x.Owner == owner).Take(count));
+            }
+            return Ok(ideas.Take(count));
         }
 
         // GET api/values/5
